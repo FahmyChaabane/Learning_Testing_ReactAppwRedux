@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { SingleDatePicker } from "react-dates";
-import "react-dates/lib/css/_datepicker.css";
 
 const ExpenseForm = (props) => {
   const [description, setDescription] = useState("");
@@ -13,6 +12,7 @@ const ExpenseForm = (props) => {
 
   useEffect(() => {
     if (props.expense) {
+      console.log(props.expense);
       setDescription(props.expense.description);
       setNote(props.expense.note);
       setAmount((props.expense.amount / 100).toString());
