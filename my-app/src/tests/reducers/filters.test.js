@@ -4,7 +4,7 @@ import filterReducer from "../../reducers/filters";
 // TEST REDUCER FILTER
 describe("test reducer of filter", () => {
   test("the setup filter reducer state", () => {
-    const result = filterReducer(undefined, { type: "@@INIT" });
+    const result = filterReducer(undefined, { type: "@@INIT" }); // icin n'importe quelle methode appellé, va aussi utilisé le moment mocké
     //console.log(result);
     expect(result).toStrictEqual({
       text: "",
