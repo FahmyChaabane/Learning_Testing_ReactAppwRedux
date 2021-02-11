@@ -9,12 +9,12 @@ import {
   setEndDate,
 } from "../actions/filters";
 
-const ExpenseListFilters = (props) => {
+export const ExpenseListFilters = (props) => {
   const [calendarFocused, setCalendarFocused] = useState(null);
 
   const onDatesChange = ({ startDate, endDate }) => {
-    props.dispatch(setStartDate(startDate));
-    props.dispatch(setEndDate(endDate));
+    props.setStartDate(startDate);
+    props.setEndDate(endDate);
   };
   const onFocusChange = (calendarFocused) => {
     setCalendarFocused(calendarFocused);
@@ -25,16 +25,16 @@ const ExpenseListFilters = (props) => {
         type="text"
         value={props.filters.text}
         onChange={(e) => {
-          props.dispatch(setTextFilter(e.target.value));
+          props.setTextFilter(e.target.value);
         }}
       />
       <select
         value={props.filters.sortBy}
         onChange={(e) => {
           if (e.target.value === "date") {
-            props.dispatch(sortByDate());
+            props.sortByDate();
           } else if (e.target.value === "amount") {
-            props.dispatch(sortByAmount());
+            props.sortByAmount();
           }
         }}
       >
@@ -55,10 +55,20 @@ const ExpenseListFilters = (props) => {
   );
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setTextFilter: (data) => dispatch(setTextFilter(data)),
+    setStartDate: (data) => dispatch(setStartDate(data)),
+    setEndDate: (data) => dispatch(setEndDate(data)),
+    sortByDate: () => dispatch(sortByDate()),
+    sortByAmount: () => dispatch(sortByAmount()),
+  };
+};
+
 const mapStateToProps = (state) => {
   return {
     filters: state.filters,
   };
 };
 
-export default connect(mapStateToProps)(ExpenseListFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseListFilters);
