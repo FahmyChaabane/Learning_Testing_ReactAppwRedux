@@ -3,21 +3,24 @@ import { shallow } from "enzyme"; // shallow renderer
 import { EditExpensePage } from "../../components/EditExpensePage";
 import expenses from "../fixtures/expenses";
 
-test("should render EditExpensePage correctly", () => {
-  const wrapper = shallow(<EditExpensePage />);
-  expect(wrapper).toMatchSnapshot();
-});
-
-test("should handle on submit", () => {
-  const editSubmitSpy = jest.fn();
-  const historySpy = { push: jest.fn() };
-  const wrapper = shallow(
+let editSubmitSpy, historySpy, wrapper;
+beforeEach(() => {
+  editSubmitSpy = jest.fn();
+  historySpy = { push: jest.fn() };
+  wrapper = shallow(
     <EditExpensePage
       expense={expenses[1]}
       editExpense={editSubmitSpy}
       history={historySpy}
     />
   );
+});
+
+test("should render EditExpensePage correctly", () => {
+  expect(wrapper).toMatchSnapshot();
+});
+
+test("should handle on submit", () => {
   wrapper.find("ExpenseForm").prop("onSubmit")(expenses[1]);
   expect(editSubmitSpy).toHaveBeenLastCalledWith(expenses[1].id, expenses[1]);
   expect(historySpy.push).toHaveBeenLastCalledWith("/");

@@ -4,6 +4,9 @@ import ExpenseForm from "./ExpenseForm";
 import { editExpense, removeExpense } from "../actions/expenses";
 
 export const EditExpensePage = (props) => {
+  if (!props.expense) {
+    return <p>id doesn't exist</p>;
+  }
   return (
     <div>
       <ExpenseForm

@@ -4,7 +4,7 @@ import HelpPage from "./components/helpPage";
 import ExpenseDashboardPage from "./components/ExpenseDashboardPage";
 import AddExpensePage from "./components/AddExpensePage";
 import EditExpensePage from "./components/EditExpensePage";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 function App() {
@@ -17,7 +17,8 @@ function App() {
           <Route path="/create" component={AddExpensePage} />
           <Route path="/edit/:id" component={EditExpensePage} />
           <Route path="/help" component={HelpPage} />
-          <Route component={NotFoundPage} />
+          <Route path="/not-found" component={NotFoundPage} />
+          <Redirect to="/not-found" />
         </Switch>
       </div>
     </BrowserRouter>
