@@ -8,7 +8,7 @@ const filtersReducerDefaultState = {
   startDate: moment().startOf("month"),
   endDate: moment().endOf("month"),
 };
-
+// eslint-disable-next-line
 export default (state = filtersReducerDefaultState, action) => {
   switch (action.type) {
     case "SET_TEXT_FILTER":

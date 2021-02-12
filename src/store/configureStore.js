@@ -2,6 +2,7 @@ import { createStore, combineReducers } from "redux";
 import expensesReducer from "../reducers/expenses";
 import filtersReducer from "../reducers/filters";
 
+// eslint-disable-next-line
 export default () => {
   const store = createStore(
     combineReducers({

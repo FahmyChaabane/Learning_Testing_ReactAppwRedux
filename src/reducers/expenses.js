@@ -1,7 +1,7 @@
 // Expenses Reducer
 
 const expensesReducerDefaultState = [];
-
+// eslint-disable-next-line
 export default (state = expensesReducerDefaultState, action) => {
   switch (action.type) {
     case "ADD_EXPENSE":
