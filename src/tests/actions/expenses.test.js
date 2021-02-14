@@ -1,39 +1,31 @@
 import { addExpense, editExpense, removeExpense } from "../../actions/expenses";
+import expenses from "../fixtures/expenses";
 
 // ADD ACTION
 describe("add action generator test", () => {
   test("with expenses info provided", () => {
-    const expenseData = {
-      description: "description",
-      note: "note",
-      amount: 10,
-      createdAt: 2222,
-    };
-    const result = addExpense(expenseData);
+    const result = addExpense(expenses[1]);
     expect(result).toStrictEqual({
       type: "ADD_EXPENSE",
-      expense: {
-        id: expect.any(String),
-        ...expenseData,
-      },
+      expense: expenses[1],
     });
   });
-  test("with default expense to be passed", () => {
-    const expenseData = {
-      description: "",
-      note: "",
-      amount: 0,
-      createdAt: 0,
-    };
-    const result = addExpense();
-    expect(result).toEqual({
-      type: "ADD_EXPENSE",
-      expense: {
-        id: expect.any(String),
-        ...expenseData,
-      },
-    });
-  });
+  // test("with default expense to be passed", () => {
+  //   const expenseData = {
+  //     description: "",
+  //     note: "",
+  //     amount: 0,
+  //     createdAt: 0,
+  //   };
+  //   const result = addExpense();
+  //   expect(result).toEqual({
+  //     type: "ADD_EXPENSE",
+  //     expense: {
+  //       id: expect.any(String),
+  //       ...expenseData,
+  //     },
+  //   });
+  // });
 });
 
 // REMOVE ACTION

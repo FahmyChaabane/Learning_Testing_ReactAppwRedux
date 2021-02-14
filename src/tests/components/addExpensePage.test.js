@@ -8,7 +8,7 @@ beforeEach(() => {
   onSubmitSpy = jest.fn();
   historySpy = { push: jest.fn() };
   wrapper = shallow(
-    <AddExpensePage addExpense={onSubmitSpy} history={historySpy} />
+    <AddExpensePage startAddExpense={onSubmitSpy} history={historySpy} />
   );
 });
 

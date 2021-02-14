@@ -6,6 +6,7 @@ import AddExpensePage from "./components/AddExpensePage";
 import EditExpensePage from "./components/EditExpensePage";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
+import "./firebase/firebase";
 
 function App() {
   return (
