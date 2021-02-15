@@ -9,6 +9,7 @@ import getVisibleExpenses from "./selectors/expenses";
 import { Provider } from "react-redux";
 import { addExpense } from "./actions/expenses";
 import { sortByAmount } from "./actions/filters";
+import "./firebase/firebase";
 
 const store = configureStore();
 
