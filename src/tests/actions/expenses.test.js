@@ -7,36 +7,73 @@ import {
 import expenses from "../fixtures/expenses";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import database from "../../firebase/firebase";
-//jest.mock("firebase");
-
 const middlewares = [thunk]; // add your middlewares like `redux-thunk`
 const mockStore = configureStore(middlewares);
 
-test("should add expense to database and store", () => {
+test("should add expense to database and store", async () => {
   const store = mockStore({});
-  const expense = {
-    description: "description1",
-    note: "note1",
-    amount: 10,
+  const expenseData = {
+    description: "description",
+    note: "note",
+    amount: 100,
     createdAt: 1000,
   };
-  store.dispatch(addExpense(expense));
-  const actions = store.getActions();
-  //console.log(actions);
-  /*
-  return store.dispatch(startAddExpense(expense)).then(() => {
-    const actions = store.getActions();
-    expect(actions[0]).toEqual(success());
+
+  const mockingAddBehaviour = jest.fn((expenseData) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          id: "XM95KS3",
+          ...expenseData,
+        });
+      }, 2000);
+    });
   });
+
+  const mockingFetchBehaviour = jest.fn((id) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ val: () => expenseData });
+      }, 2000);
+    });
+  });
+
+  await mockingAddBehaviour(expenseData).then((addedData) => {
+    store.dispatch(addExpense(addedData));
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: "ADD_EXPENSE",
+      expense: {
+        id: expect.any(String),
+        ...expenseData,
+      },
+    });
+    mockingFetchBehaviour(addedData.id).then((snapShot) => {
+      expect(snapShot.val()).toEqual(expenseData);
+    });
+  });
+  /*
+  await mockingAddBehaviour(expenseData)
+    .then((addedData) => {
+      console.log(addedData);
+      store.dispatch(addExpense(addedData));
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "ADD_EXPENSE",
+        expense: {
+          id: expect.any(String),
+          ...expenseData,
+        },
+      });
+
+      return mockingFetchBehaviour(addedData.id);
+    })
+    .then((snapShot) => {
+      expect(snapShot.val()).toEqual(expenseData);
+    });
   */
 });
 
-/*
-test("myFIREBASE_TEST", () => {
-  return database.ref("expenses").remove();
-});
-*/
 // ADD ACTION
 describe("add action generator test", () => {
   test("with expenses info provided", () => {
@@ -46,28 +83,6 @@ describe("add action generator test", () => {
       expense: expenses[1],
     });
   });
-
-  /*
-  test("should add expense with default data to database and store", () => {
-    expect(1).toEqual(2);
-  });
-  */
-  // test("with default expense to be passed", () => {
-  //   const expenseData = {
-  //     description: "",
-  //     note: "",
-  //     amount: 0,
-  //     createdAt: 0,
-  //   };
-  //   const result = addExpense();
-  //   expect(result).toEqual({
-  //     type: "ADD_EXPENSE",
-  //     expense: {
-  //       id: expect.any(String),
-  //       ...expenseData,
-  //     },
-  //   });
-  // });
 });
 
 // REMOVE ACTION
