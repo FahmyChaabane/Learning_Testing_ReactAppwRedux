@@ -7,6 +7,7 @@ import {
 import expenses from "../fixtures/expenses";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
+import database from "../../firebase/database";
 const middlewares = [thunk]; // add your middlewares like `redux-thunk`
 const mockStore = configureStore(middlewares);
 
@@ -113,3 +114,34 @@ describe("edit action generator test", () => {
     });
   });
 });
+
+/*
+//supposed to work but bug into firebase
+test("firebase firebase firebase", async () => {
+  const store = mockStore({});
+  const expenseData = {
+    description: "description",
+    note: "note",
+    amount: 100,
+    createdAt: 1000,
+  };
+
+  await store
+    .dispatch(startAddExpense(expenseData))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "ADD_EXPENSE",
+        expense: {
+          id: expect.any(String),
+          ...expenseData,
+        },
+      });
+
+      return database.ref(`expenses/${actions[0].expense.id}`).once("value");
+    })
+    .then((snapShot) => {
+      expect(snapShot.val()).toEqual(expenseData);
+    });
+});
+*/
