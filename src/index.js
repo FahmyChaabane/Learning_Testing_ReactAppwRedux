@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "react-dates/lib/css/_datepicker.css";
 import configureStore from "./store/configureStore";
-import getVisibleExpenses from "./selectors/expenses";
 import { Provider } from "react-redux";
+import getVisibleExpenses from "./selectors/expenses";
 import { addExpense } from "./actions/expenses";
 import { sortByAmount } from "./actions/filters";
+import "./index.css";
+import "react-dates/lib/css/_datepicker.css";
 import "./firebase/firebase";
 
 const store = configureStore();

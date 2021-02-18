@@ -2,7 +2,7 @@ import expenseReducer from "../../reducers/expenses";
 import expenses from "../fixtures/expenses";
 import { v4 as uuidv4 } from "uuid";
 
-// TEST REDUCER FILTER
+// TEST REDUCER EXPENSES
 describe("test reducer of filter", () => {
   test("the setup expenses reducer state", () => {
     const result = expenseReducer(undefined, { type: "@@INIT" });
@@ -60,5 +60,13 @@ describe("test reducer of filter", () => {
       updates,
     });
     expect(result).toStrictEqual(expenses);
+  });
+
+  test("should return state with expenses", () => {
+    const result = expenseReducer(expenses, {
+      type: "SET_EXPENSES",
+      expenses: [expenses[0], expenses[1]],
+    });
+    expect(result).toEqual([expenses[0], expenses[1]]);
   });
 });

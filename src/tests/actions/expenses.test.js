@@ -1,8 +1,10 @@
 import {
   startAddExpense,
+  setExpenses,
   addExpense,
   editExpense,
   removeExpense,
+  startRemoveExpense,
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import configureStore from "redux-mock-store";
@@ -10,6 +12,22 @@ import thunk from "redux-thunk";
 import database from "../../firebase/database";
 const middlewares = [thunk]; // add your middlewares like `redux-thunk`
 const mockStore = configureStore(middlewares);
+
+/*
+beforeEach((done) => {
+  expenses.map((item) => {
+    database
+      .ref("expenses")
+      .push({
+        description: item.description,
+        note: item.note,
+        amount: item.amount,
+        createdAt: item.createdAt,
+      })
+      .then(() => done());
+  });
+});
+*/
 
 test("should add expense to database and store", async () => {
   const store = mockStore({});
@@ -115,9 +133,18 @@ describe("edit action generator test", () => {
   });
 });
 
+// SET EXPENSES ACTION
+test("should return all expenses", () => {
+  const action = setExpenses(expenses);
+  expect(action).toEqual({
+    type: "SET_EXPENSES",
+    expenses,
+  });
+});
+
 /*
-//supposed to work but bug into firebase
-test("firebase firebase firebase", async () => {
+//supposed to work but bug in firebase
+test("firebase adding an item", async () => {
   const store = mockStore({});
   const expenseData = {
     description: "description",
@@ -142,6 +169,26 @@ test("firebase firebase firebase", async () => {
     })
     .then((snapShot) => {
       expect(snapShot.val()).toEqual(expenseData);
+    });
+});
+*/
+/*
+test("firebase removing an item", async () => {
+  const store = mockStore({});
+  const id = "whatsoever";
+  await store
+    .dispatch(startRemoveExpense({ id }))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "REMOVE_EXPENSE",
+        id,
+      });
+
+      return database.ref(`expenses/${id}`).once("value");
+    })
+    .then((snapShot) => {
+      expect(snapShot.val()).toBeFalsy();
     });
 });
 */

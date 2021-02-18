@@ -10,7 +10,7 @@ beforeEach(() => {
   wrapper = shallow(
     <EditExpensePage
       expense={expenses[1]}
-      editExpense={editSubmitSpy}
+      startEditExpense={editSubmitSpy}
       history={historySpy}
     />
   );
@@ -32,7 +32,7 @@ test("should handle on click", () => {
   const wrapper = shallow(
     <EditExpensePage
       expense={expenses[1]}
-      removeExpense={removeSubmitSpy}
+      startRemoveExpense={removeSubmitSpy}
       history={historySpy}
     />
   );
