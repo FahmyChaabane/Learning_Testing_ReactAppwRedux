@@ -9,8 +9,7 @@ import { addExpense } from "./actions/expenses";
 import { sortByAmount } from "./actions/filters";
 import "./index.css";
 import "react-dates/lib/css/_datepicker.css";
-import "./firebase/firebase";
-
+import { BrowserRouter } from "react-router-dom";
 const store = configureStore();
 
 // store.dispatch(addExpense({ description: "Water bill", amount: 4500 }));
@@ -25,9 +24,11 @@ const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <BrowserRouter>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );

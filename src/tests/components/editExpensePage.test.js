@@ -23,7 +23,7 @@ test("should render EditExpensePage correctly", () => {
 test("should handle on submit", () => {
   wrapper.find("ExpenseForm").prop("onSubmit")(expenses[1]);
   expect(editSubmitSpy).toHaveBeenLastCalledWith(expenses[1].id, expenses[1]);
-  expect(historySpy.push).toHaveBeenLastCalledWith("/");
+  expect(historySpy.push).toHaveBeenLastCalledWith("/dashboard");
 });
 
 test("should handle on click", () => {
@@ -38,5 +38,5 @@ test("should handle on click", () => {
   );
   wrapper.find("button").simulate("click");
   expect(removeSubmitSpy).toHaveBeenLastCalledWith({ id: expenses[1].id });
-  expect(historySpy.push).toHaveBeenLastCalledWith("/");
+  expect(historySpy.push).toHaveBeenLastCalledWith("/dashboard");
 });
