@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ExpenseList from "./ExpenseList";
 import ExpenseListFilters from "./ExpenseListFilters";
 import ExpensesSummary from "./ExpensesSummary";
+import LoadingPage from "./LoadingPage";
 import { startSetExpenses } from "../actions/expenses";
 
 export const ExpenseDashboardPage = (props) => {
@@ -17,7 +18,7 @@ export const ExpenseDashboardPage = (props) => {
   return (
     <div>
       {data ? (
-        <p>loading...</p>
+        <LoadingPage />
       ) : (
         <div>
           <ExpensesSummary />
