@@ -6,9 +6,9 @@ export const LoginPage = (props) => {
   return <button onClick={props.startLogin}>Login</button>;
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, { history }) => {
   return {
-    startLogin: () => dispatch(startLogin()),
+    startLogin: () => dispatch(startLogin(history)),
   };
 };
 

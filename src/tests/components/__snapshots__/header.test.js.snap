@@ -6,20 +6,16 @@ exports[`should render header correctly 1`] = `
     Expensifie
   </h1>
   <NavLink
-    activeClassName="is-active"
-    exact={true}
     to="/dashboard"
   >
     Dashboard
   </NavLink>
   <NavLink
-    activeClassName="is-active"
     to="/create"
   >
     Create Expense
   </NavLink>
   <NavLink
-    activeClassName="is-active"
     to="/help"
   >
     Help
